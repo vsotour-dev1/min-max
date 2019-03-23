@@ -1,0 +1,65 @@
+
+.act_left_img, .act_left, .act_right{
+	float:left;
+	margin-left:5px;
+	
+}
+
+.act_left_img{
+	 width:15%;
+	
+}
+.file_img{
+	
+width: 100%;
+}
+.act_left{
+ width: 10%;	
+}
+
+.act_right{
+ width: 70%;	
+}
+   
+.d_h2{
+	      font-size: 1.7em;
+    line-height: 1em;
+    font-family: fontttc;
+}
+
+.day-box .title {
+    background: #440099;
+    height: 20px;
+    line-height: 20px;
+    font-size: 0.5333em;
+    color: #fff;
+    margin: 0;
+    display: block;
+    font-family: arial;
+}
+.day-box .day {
+ 
+    color: #7fb231;
+    margin-top: 6px;
+    margin: 0;
+    display: block;
+}
+
+.day-box {
+       min-width: 72px;
+    height: 60px;
+    background: #eee;
+    text-align: center;
+    float: left;
+    margin-right: 20px;
+    border-radius: 7px;
+}
+
+.bt-spoiler-title {
+    height: 70px !important;
+	
+}
+
+.bt-accordion-plus .bt-spoiler-collapse:before {
+  display:none;
+}

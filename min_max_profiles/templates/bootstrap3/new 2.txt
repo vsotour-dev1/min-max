@@ -1,0 +1,344 @@
+function myFunction(row_id){
+var row = "row_"+row_id;
+
+var htm = "";
+
+
+  document.getElementById(row).innerHTML = htm ;
+    removeMarkers(map,row_id);
+  
+}
+
+function remove(e){
+
+
+//console.log( e.parentNode.parentNode.parentNode);
+ e.parentNode.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode.parentNode)
+//var row = "draggable_"+row_id;
+
+//var htm = "";
+
+
+//  document.getElementById(row).innerHTML = htm ;
+  
+  
+}
+jomresJquery(document).ready(function () {
+	
+
+jomresJquery( "#button_add" ).click(function() {
+
+var row_id = jomresJquery(this).attr('data-row');
+
+var row = "#row_"+row_id;
+var row_idi = parseInt(row_id)+1;
+addMarker(map,row_idi);
+jomresJquery(this).attr('data-row',row_idi);
+var htm = "<div class='clear' ></div><div style='clear:both;' />	<div class='row_1' id='row_"+row_idi+"'><div class='col-md-2 table_row_1 first_row'>";
+ htm += " <span onclick='myFunction(\""+row_idi+"\")' class='minus_img col-md-1' id='button_remove' data-row='"+row_idi+"'></span></div>";	
+  htm += "<div class='col-md-2 table_row_1'><select id='country_"+row_idi+"' name='country_"+row_idi+"' class='form-control'>{COUNTRIESDROPDOWNAJAX}	</select>	</div>	<div class='col-md-2 table_row_1' id='property_region_"+row_idi+"'><select id='region_"+row_idi+"' name='region_"+row_idi+"' class='form-control'>	{REGIONDROPDOWNAJAX} </select>	</div>		";
+htm += "<div class='col-md-2 table_row_1'>	<input id='lat_"+row_idi+"' name='lat_"+row_idi+"' type='text' size='20' value='{LAT}' class='form-control' placeholder='00.0000'/> 	</div>";
+	htm += "<div class='col-md-2 table_row_1'><input id='lng_"+row_idi+"' name='long_"+row_idi+"' type='text' size='20' value='{LONG}' class='form-control' placeholder='{00.0000}'/>		</div>			</div>	";
+ 
+ jomresJquery( row ).after( htm );
+ 
+});
+
+});
+	
+jomresJquery( "#button_remove_1" ).click(function() {
+var row_id = jomresJquery(this).attr('data-row');
+
+var row = "#row_"+row_id;
+
+var htm = "";
+
+  jomresJquery( row ).text( htm );
+
+});
+// start add days javascript code pop up dialog and draggable element
+  
+
+
+  jomresJquery( function() {
+  
+    var dialog, form,
+  
+    dialog = jomresJquery( "#dialog-form" ).dialog({
+      autoOpen: false,
+      height: 900,
+      width: 1000,
+      modal: true,
+      buttons: {
+        "Save": function() {
+			sv();
+          dialog.dialog( "close" );
+        },
+        Cancel: function() {
+          dialog.dialog( "close" );
+        }
+      },
+      close: function() {
+       
+      //  allFields.removeClass( "ui-state-error" );
+      }
+    });
+	
+	
+ function sv(){
+var activity = jomresJquery('input[name^="activity"]');
+var day_title = jomresJquery('input[name^="day_title"]');
+var inputValue = '';
+var day_idis = jomresJquery('#day_id').val();
+var in_p = {};
+day_idis  = day_idis.toString()
+in_p[day_idis] = {};
+
+for (var row_f = 0; row_f <10; row_f++){
+
+var row = 'row_'+row_f.toString();
+in_p[day_idis][row] = {};
+
+
+
+}
+
+
+day_title.each(function() {
+ in_p[day_idis][this.name] = jomresJquery(this).val();
+});
+
+
+
+activity.each(function() {
+
+var row_i = jomresJquery(this).attr('row_i');
+
+ in_p[day_idis]['row_'+row_i][this.name] = jomresJquery(this).val();
+ 
+
+});
+var day_value = JSON.stringify(in_p);
+console.log(day_value);
+	var div_html = "<div id='button_edit_days' data-row='"+day_idis+"' class='btn btn-md btn-primary' ><i class='fa fa-check'></i>"+in_p[day_idis]['day_title'];		
+ div_html  += "<input type='hidden' name='tour_days["+day_idis+"]' id='tour_days_"+day_idis+"' value='"+day_value+"' /> </div>"
+	
+	populateDiv("row_day_"+day_idis,div_html);
+	
+			
+edit_days();
+
+}
+   
+ 
+    jomresJquery( "#button_add_days" ).button().on( "click", function() {
+      
+	  var row_id = jomresJquery(this).attr('data-row');
+var row = "#row_day_"+row_id;
+var row_idi = parseInt(row_id)+1;
+jomresJquery(this).attr('data-row',row_idi);
+jomresJquery('#day_id').val(row_idi);
+dialog.dialog( "open" );
+var htm = "<div style='clear:both;' />	<div class='row_1' id='row_day_"+row_idi+"'>"+row_idi+"</div>	";
+  jomresJquery( row ).after( htm );
+  edit_days();
+    });
+	var vl = '';
+	
+	function edit_days(){
+	   jomresJquery( "#button_edit_days" ).button().on( "click", function() {
+      
+	  var row_id = jomresJquery(this).attr('data-row');
+var row = "#row_day_"+row_id;
+var row_idi = parseInt(row_id);
+jomresJquery(this).attr('data-row',row_idi);
+jomresJquery('#day_id').val(row_idi);
+vl = jomresJquery('#tour_days_'+row_idi).val();
+
+
+
+	
+	
+var obj = JSON.parse(vl);
+var rows = obj[row_idi];
+
+var ht = '';
+var k =1;
+
+/*
+jQuery.each(rows, function(i, row) {
+  
+
+if ((typeof rows[i]['activity']) != "undefined"  ){
+	if (k==1) {
+	jomresJquery('#act_1').val(rows[i]['activity']);	
+	jomresJquery('#act_des_1').val(rows[i]['activity_act_description']);	
+	}else{
+		
+		var row_id = k-1;
+	   var row = "#section_"+row_id;
+		var row_idi = parseInt(row_id)+1;
+		jomresJquery(this).attr('data-row',row_idi);
+		var htm = "<div style='clear:both;' />";
+		htm += "<div id='section_"+row_idi+"' class='section' ><div class='drag' ><div id='draggable' class='ui-widget-content draggable'>";
+		htm += "<div id='dr_ch'>";
+		htm += "<div class='inp_1'><input name='activity' value='' type='text' placeholder='Activity' value='"+rows[i]['activity']+"'  id='act_"+row_idi+"'  row_i='"+row_idi+"' /></div>";
+		htm += "<div class='inp_2'><input type='text'  class='input_1' name='activity_act_description' value='"+rows[i]['activity_act_description']+"' id='act_des_"+row_idi+"'  row_i='"+row_idi+"' value='' placeholder='Activity description'/></div><div class='inp_move'><div class='move_par'><span class='move_img'>move</span></div></div>";
+		htm += "<div class='inp_move'><div class='move_del'><span class='minus_img' onclick='remove(this)'>remove</span></div></div></div>";
+		htm += "</div>";
+		
+		
+		htm += " </div> <div class='clear_me' ></div>";
+	
+		htm += "	</div>  </div>";	
+		
+		jomresJquery( row ).after( htm );
+		
+		
+	}
+console.log(row);
+
+k++;
+}
+
+
+
+   
+	
+	});
+	
+	
+ 
+*/
+
+
+dialog.dialog( "open" );
+
+  
+    });
+	}
+	
+	edit_days();
+    jomresJquery( "#add_s" ).button().on( "click", function() {
+	var row_id = jomresJquery(this).attr('data-row');
+    var row = "#section_"+row_id;
+		var row_idi = parseInt(row_id)+1;
+		jomresJquery(this).attr('data-row',row_idi);
+		var htm = "<div style='clear:both;' />";
+		htm += "<div id='section_"+row_idi+"' class='section' ><div class='drag' ><div id='draggable' class='ui-widget-content draggable'>";
+		htm += "<div id='dr_ch'>";
+		htm += "<div class='inp_1'><input name='activity' value='' type='text' placeholder='Activity' id='act_"+row_idi+"'  row_i='"+row_idi+"' /></div>";
+		htm += "<div class='inp_2'><input type='text'  class='input_1' name='activity_act_description'  id='act_des_"+row_idi+"'  row_i='"+row_idi+"' value='' placeholder='Activity description'/></div><div class='inp_move'><div class='move_par'><span class='move_img'>move</span></div></div>";
+		htm += "<div class='inp_move'><div class='move_del'><span class='minus_img' onclick='remove(this)'>remove</span></div></div></div>";
+		htm += "</div>";
+		
+		
+		htm += " </div> <div class='clear_me' ></div>";
+	
+		htm += "	</div>  </div>";
+		
+		jomresJquery( row ).after( htm );
+		
+	 drag_drop();
+  
+  
+    });
+	
+  } );
+  function drag_drop(){
+    /*
+var dr_row = 20;
+//console.log('dr_row', dr_row);
+for (var i = 1; i <= dr_row; i++) {
+console.log('i', i);
+     jomresJquery( "#draggable_"+i ).draggable({
+     helper:"clone",
+       handle: "div.move_par",
+       cursor: "crosshair",
+        start: function( event, ui ) {
+                   // console.log(ui.helper.context)
+                  //  console.log('cl',ui.helper.clone().context.innerHTML);
+                }
+    });
+	 
+	
+	}
+	
+	var drop_row = 30;
+for (var i = 1; i <= drop_row; i++) {
+console.log('i_drop', i);
+      jomresJquery( "#droppable_"+i ).droppable({
+
+       hoverClass: "ui-state-over",
+      drop: function( event, ui ) {
+        jomresJquery( this )
+          .addClass( "ui-state-highlight" )
+          .find( "div" )
+            .html( ui.helper.clone().context.innerHTML );
+            jomresJquery( "#droppable_"+i ).droppable("option", "disabled", true); 
+            
+      }
+    });
+	
+	}
+	
+	*/
+
+	  jomresJquery( ".droppable" ).draggable({
+     helper:"clone",
+       handle: "div.move_par",
+       cursor: "crosshair",
+        start: function( event, ui ) {
+                   // console.log(ui.helper.context)
+                  //  console.log('cl',ui.helper.clone().context.innerHTML);
+                }
+    });
+	
+	jomresJquery( ".draggable" ).droppable(
+	
+	{
+       hoverClass: "ui-state-over",
+	   
+      drop: function( event, ui ) {
+        jomresJquery( this )
+          .addClass( "ui-state-highlight" )
+          .find( "div" )
+            .html( ui.helper.clone().context.innerHTML );
+             
+            
+      }
+    });
+	
+		jomresJquery( ".droppable" ).droppable(
+	
+	{
+       hoverClass: "ui-state-over",
+	   
+      drop: function( event, ui ) {
+        jomresJquery( this )
+          .addClass( "ui-state-highlight" )
+          .find( "div" )
+            .html( ui.helper.clone().context.innerHTML );
+             
+            
+      }
+    });
+	
+	  jomresJquery( ".draggable" ).draggable({
+     helper:"clone",
+       handle: "div.move_par",
+       cursor: "crosshair",
+        start: function( event, ui ) {
+                   // console.log(ui.helper.context)
+                  //  console.log('cl',ui.helper.clone().context.innerHTML);
+                }
+    });
+  
+  
+  }
+
+  jomresJquery( function() {
+  
+ drag_drop();
+	    
+  } );

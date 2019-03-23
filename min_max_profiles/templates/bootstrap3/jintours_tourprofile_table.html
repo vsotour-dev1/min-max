@@ -1,0 +1,107 @@
+<patTemplate:tmpl name="pageoutput" unusedvars="strip">
+
+
+
+
+
+
+
+
+
+<div class="form-group" id="table_price" style="width: 1000px;">
+	<label class="col-md-2 control-label" for="price_class">{PRICECLASS}</label>
+	<div class="col-md-1" style="text-align: center;
+    padding-left;
+    width: 50px;">
+		<div style="padding: 5px;font-weight: bold;"></div>
+	</div>
+	<div class="table_1 col-md-10">
+	<div class="head">
+	<div class="col-md-1 table_row">
+		{MIN}
+	</div>
+	<div class="col-md-1 table_row">
+		{MAX}
+	</div>
+	{PRICE_SPACES}
+	</div>
+	<div class="clear" style="clear:both;" ></div>
+	<div class="row_1" id="row_1">
+
+	{PRICE_TABLE_SPACES}
+	</div>
+		
+
+
+	</div>
+<style  type="text/css">
+
+
+
+
+/*rusty */
+
+.table_row {
+    font-size: 11px;
+    font-weight: bold;
+    border: solid 1px;
+    background: lightgrey;
+	    height: 30px;
+}
+.table_row_1 {
+    font-size: 11px;
+
+    border: solid 1px;
+
+}
+.space_row{
+	
+width:50px;	
+	
+}
+.clear {
+    clear: both;
+}
+
+.button_add {
+    font-size: 14px;
+    font-weight: bold;
+    background: lightgray;
+    border: solid 1px BLACK;
+    margin-left: 10px;
+    width: 130px;
+    color: white;
+	cursor: pointer;
+}	
+	</style>	
+</div>
+
+
+<!--
+<div class="form-group">
+	<label class="col-md-2 control-label" for="price_adults">{HPRICE_ELDERS}</label>
+	<div class="col-md-10">
+		<input type="text" class="form-control" name="price_elders" value="{PRICE_ELDERS}" />
+	</div>
+</div>
+<div class="form-group">
+	<label class="col-md-2 control-label" for="price_adults">{HPRICE_ADULTS}</label>
+	<div class="col-md-10">
+		<input type="text" class="form-control" name="price_adults" value="{PRICE_ADULTS}" />
+	</div>
+</div>
+<div class="form-group">
+	<label class="col-md-2 control-label" for="price_kids">{HPRICE_KIDS}</label>
+	<div class="col-md-10">
+		<input type="text" class="form-control" name="price_kids" value="{PRICE_KIDS}" />
+		<p class="help-block">
+			{KIDS_INFO}
+		</p>
+	</div>
+</div>
+
+!-->
+
+</form>
+
+</patTemplate:tmpl>

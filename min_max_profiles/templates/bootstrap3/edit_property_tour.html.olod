@@ -1,0 +1,610 @@
+<patTemplate:tmpl name="pageoutput" unusedvars="strip">
+	
+<style>
+.REmail {border:solid 1px {INPUTBOXERRORBORDER};background-color: {INPUTBOXERRORBACKGROUND};}
+span.required {color:red;}
+</style>
+<style type="text/css">
+
+
+/* end modal popup css */
+
+.col-md-2.table_row.first_row, .col-md-2.table_row_1.first_row {
+    width: 100px;
+}
+	.minus_img {
+		width: 25px;
+    height: 25px;
+    background: url({LIVE_SITE}/{JOMRES_ROOT_DIRECTORY}/remote_plugins/min_max_profiles/css/minus.jpg) center center no-repeat;
+    display: block;
+    text-indent: -9999px;
+    background-size: 25px;
+	}
+	.plus_img {
+		width: 25px;
+    height: 25px;
+    background: url({LIVE_SITE}/{JOMRES_ROOT_DIRECTORY}/remote_plugins/min_max_profiles/css/plus.jpg) center center no-repeat;
+    display: block;
+    text-indent: -9999px;
+    background-size: 25px;
+	}
+
+.table_row {
+    font-size: 11px;
+    font-weight: bold;
+    border: solid 1px;
+    background: #eceaea;
+    height: 40px;
+}
+.table_row_1 {
+    font-size: 11px;
+    border: solid 1px;
+    height: 40px;
+}
+
+.first_row {
+    border: none;
+    background: white;
+	cursor: pointer;
+}
+
+.reset_b{
+    color: white;
+    font-weight: bold;
+    display: block;
+    background: #5c9ccc;
+    text-align: center;
+    margin-top: 10px;
+    width: 70%;
+    margin-left: 170px;
+    height: 20px;
+    cursor: pointer;
+	
+
+}
+
+
+
+</style>
+<script language="javascript">
+<!--
+/* function OnChange(dropdown)
+	{	
+	var myindex	= dropdown.selectedIndex
+	var baseURL= "{JOMRES_SITEPAGE_URL}&amp;task=edit_property"
+	top.location.href = baseURL + "&propertyUid={PROPERTYUID}&selectedCountry="+dropdown.options[myindex].value;
+	return true;
+	}
+*/	
+jomresJquery(function(){
+		jomresJquery("#country").change(function(){
+			var selectedValue = jomresJquery(this).find(":selected").val();
+			clause = "&task=get_region_dropdown_for_country_code&country="+selectedValue;
+			jomresJquery.get(live_site_ajax + clause, function (data) {
+				populateDiv("property_region",data);
+				});
+			});
+		});
+		
+
+
+
+  jomresJquery(function(){
+  jomresJquery("body").on("change","#country_2",function(){
+
+	
+			var selectedValue = jomresJquery(this).find(":selected").val();
+			clause = "&task=get_region_dropdown_for_country_code&country="+selectedValue;
+			jomresJquery.get(live_site_ajax + clause, function (data) {
+				populateDiv("property_region_2",data);
+				});
+			});
+		});
+		  jomresJquery(function(){
+  jomresJquery("body").on("change","#country_1",function(){
+
+	
+			var selectedValue = jomresJquery(this).find(":selected").val();
+			clause = "&task=get_region_dropdown_for_country_code&country="+selectedValue;
+			jomresJquery.get(live_site_ajax + clause, function (data) {
+				populateDiv("property_region_1",data);
+				});
+			});
+		});
+	 jomresJquery(function(){
+	  jomresJquery("body").on("change","#country_3",function(){
+		
+			var selectedValue = jomresJquery(this).find(":selected").val();
+			clause = "&task=get_region_dropdown_for_country_code&country="+selectedValue;
+			jomresJquery.get(live_site_ajax + clause, function (data) {
+				populateDiv("property_region_3",data);
+				});
+			});
+		});
+ jomresJquery(function(){
+  jomresJquery("body").on("change","#country_4",function(){
+		
+			var selectedValue = jomresJquery(this).find(":selected").val();
+			clause = "&task=get_region_dropdown_for_country_code&country="+selectedValue;
+			jomresJquery.get(live_site_ajax + clause, function (data) {
+				populateDiv("property_region_4",data);
+				});
+			});
+		});
+ jomresJquery(function(){
+  jomresJquery("body").on("change","#country_5",function(){
+		
+			var selectedValue = jomresJquery(this).find(":selected").val();
+			clause = "&task=get_region_dropdown_for_country_code&country="+selectedValue;
+			jomresJquery.get(live_site_ajax + clause, function (data) {
+				populateDiv("property_region_5",data);
+				});
+			});
+		});
+ jomresJquery(function(){
+	  jomresJquery("body").on("change","#country_6",function(){
+		
+			var selectedValue = jomresJquery(this).find(":selected").val();
+			clause = "&task=get_region_dropdown_for_country_code&country="+selectedValue;
+			jomresJquery.get(live_site_ajax + clause, function (data) {
+				populateDiv("property_region_6",data);
+				});
+			});
+		});		
+
+
+
+		
+//-->
+</script>
+<link rel="stylesheet" type="text/css" href="{LIVE_SITE}/{JOMRES_ROOT_DIRECTORY}/remote_plugins/min_max_profiles/templates/bootstrap3/style.css" media="all" />
+<h2 class="page-header">{PAGETITLE}</h2>
+
+<patTemplate:tmpl name="approval_warning" type="simpleCondition" requiredVars="approvalwarning">
+<p class="alert alert-warning">{APPROVALWARNING}</p>
+</patTemplate:tmpl>
+
+<patTemplate:tmpl name="change_country_warning" type="simpleCondition" requiredVars="changecountrywarning">
+<p class="alert alert-info">{CHANGECOUNTRYWARNING}</p>
+</patTemplate:tmpl>
+
+<form action="{JOMRES_SITEPAGE_URL_NOSEF}" method="post" name="adminForm" role="form" class="form-horizontal">
+	<div class="form-group">
+	<label class="col-md-2 control-label" for="propertyCountry"></label>
+	<div class="table_1 col-md-10">
+	<div class="head">
+	<div class="col-md-2 table_row  first_row">
+		
+	</div>
+	<div class="col-md-2 table_row">
+			<label class="col-md-2 control-label" for="xyz">{HCOUNTRY}</label>
+	</div>
+	<div class="col-md-2 table_row">
+		<label class="col-md-2 control-label" for="region">{HREGION}</label>
+	</div>
+	<div class="col-md-2 table_row">
+	<label class="col-md-2 control-label" for="lat">Lat: (nn.nnnn)</label>
+	</div>
+	<div class="col-md-2 table_row">
+	<label class="col-md-2 control-label" for="long">Long: (nn.nnnn)</label>
+	</div>
+	</div>
+	<div class="clear" ></div>
+
+	
+			<!--
+		<div class="col-md-2 table_row_1"> 	</div>
+		<div class="col-md-2 table_row_1" id="property_region"> 	</div>
+		<div class="col-md-2 table_row_1"> 	<input id="lat" name="lat" type="text" size="20" value="{LAT}" class="form-control" placeholder="00.0000"/> 	</div>
+		<div class="col-md-2 table_row_1"> 	<input id="lng" name="long" type="text" size="20" value="{LONG}" class="form-control" placeholder="{00.0000}"/>	</div>
+		!-->
+		
+
+{CON}
+
+	</div>
+	
+	
+</div>
+	
+	
+
+
+	<div class="form-group">
+		<label class="col-md-2 control-label" for="firstname">{LATLONG_DESC}</label><div id="tour_target_registration_2_latlong"></div>
+		<div class="col-md-10">
+			{MAP}
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-md-2 control-label" for="propertyType">{HPROPERTY_TYPE}</label>
+		<div class="col-md-10">
+			{PROPERTY_TYPE_DROPDOWN}
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-md-2 control-label" for="property_name">{HNAME}</label><div id="tour_target_registration_2_name_address"></div>
+		<div class="col-md-10">
+			<input id="property_name" name="property_name" type="text" size="20" value="{PROPERTY_NAME}" class="form-control " placeholder="{COMMON_PLACEHOLDER_PROPERTYNAME}"/>
+		</div>
+	</div>
+	<!-- remove for tours
+	<div class="form-group">
+		<label class="col-md-2 control-label" for="property_street">{HSTREET}</label>
+		<div class="col-md-10">
+			<input id="property_street" name="property_street" type="text" size="20" value="{PROPERTY_STREET}" class="form-control" placeholder="{COMMON_PLACEHOLDER_STREET}"/>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-md-2 control-label" for="property_town">{HTOWN}</label>
+		<div class="col-md-10">
+			<input id="property_town" name="property_town" type="text" size="20" value="{PROPERTY_TOWN}" class="form-control" placeholder="{COMMON_PLACEHOLDER_TOWN}"/>
+		</div>
+	</div>
+	!-->
+	<div class="form-group">
+		<label class="col-md-2 control-label" for="property_postcode">{HPOSTCODE}</label>
+		<div class="col-md-10">
+			<input id="property_postcode" name="property_postcode" type="text" size="20" value="{PROPERTY_POSTCODE}" class="form-control" placeholder="{COMMON_PLACEHOLDER_POSTCODE}"/>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-md-2 control-label" for="property_tel">{HTELEPHONE}</label>
+		<div class="col-md-10">
+			<input id="property_tel" name="property_tel" type="tel" size="20" value="{PROPERTY_TEL}" class="form-control" placeholder="{COMMON_PLACEHOLDER_LANDLINE}"/>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-md-2 control-label" for="property_fax">{HFAX}</label>
+		<div class="col-md-10">
+			<input id="property_fax" name="property_fax" type="text" value="{PROPERTY_FAX}" class="form-control" placeholder="{HFAX}"/>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-md-2 control-label" for="property_email">{HEMAIL}</label>
+		<div class="col-md-10">
+			<input id="property_email" name="property_email" type="email" size="20" value="{PROPERTY_EMAIL}" class="form-control" placeholder="{COMMON_PLACEHOLDER_EMAIL}"/>
+		</div>
+	</div>
+
+	
+	<div class="form-group">
+		<label class="col-md-2 control-label" for="pid">{HFEATURES}</label><div id="tour_target_registration_2_features"></div>
+		<div class="col-md-10">
+			<patTemplate:tmpl name="globalPfeatures">
+			<div style="float:left;">
+				<input type="checkbox" name="pid[]" value="{PID}" style="float:left;" {ISCHECKED}> {FEATURE}
+			</div>
+			</patTemplate:tmpl>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-md-2 control-label" for="property_description">{HPROPDESCRIPTION}</label>
+		<div id="tour_target_registration_2_description"></div>
+		<div class="col-md-10">
+			{PROPERTY_DESCRIPTION}
+		</div>
+	</div>
+	
+	
+	<div class="form-group">
+		<label class="col-md-2 control-label" for="property_days">{HPROPDAYS}</label>
+		<div id="tour_target_registration_2_days"></div>
+		<div class="col-md-10">
+		<div id="row_day_1"></div>
+			<div id="button_add_days" class="but" data-row="1">Add Accordion Group</div>
+		</div>
+	</div>
+
+
+
+  <!-- Modal content -->
+  <div id="dialog-form" title="Form">
+  <div class="add_b_s">
+<div class="day_title"><input type="text"  class="input_title" name="day_title[]" value="" placeholder="Day"/></div>
+<br />
+<button id="add_s" data-row="1">Add Section</button>
+</div>
+
+<div id="section_1" class="section" >
+<div class="drag" >
+<div id="draggable_1" class="ui-widget-content draggable">
+<div id="dr_ch">
+<div class="inp_1"><input name="activity[]" value="" type="text" placeholder="Activity"/></div>
+<div class="inp_2"> <!-- {PROPERTY_DAY_ACT} !--><input type='text'  class='input_1' name='activity_act_description[]' value='' placeholder='Activity description'/> </div>
+<div class="inp_move"><div class="move_par"><span class="move_img">move</span></div></div>
+<div class="inp_move"><div class="move_del"><span class="minus_img" onclick='remove(this)'>remove</span></div></div>
+</div>
+</div>
+
+<div class="clear_me" ></div>
+
+<div id="draggable_2" class="ui-widget-content draggable">
+<div id="dr_ch">
+<div class="inp_1"><input name="activity_res[]" value="" type="text" placeholder="Restaurant"/></div>
+<div class="inp_2"><input type="text"  class="input_1" name="activity_act_res_desc[]" value="" placeholder="Restaurant description"/></div>
+
+<div class="inp_move"><div class="move_par"><span class="move_img">move</span></div></div>
+<div class="inp_move"><div class="move_del"><span class="minus_img" onclick='remove(this)'></span></div></div>
+</div>
+</div>
+<div class="clear_me" ></div>
+</div>
+<div class="clear_me" ></div>
+ <div class="drop">
+  <div id="droppable_1" class="ui-widget-header droppable"> <div></div> </div>
+  <div class="clear_me" ></div>
+<div id="droppable_2" class="ui-widget-header droppable">  <div></div> </div>
+<div class="clear_me" ></div>
+<div id="droppable_3" class="ui-widget-header droppable">   <div></div> </div>
+<div class="clear_me" ></div>
+	</div>
+ </div>
+</div>
+<!-- end dialog modal !-->
+<div class="form-group">
+		<label class="col-md-2 control-label" for="property_policies_disclaimers">{HPOLICIESDISCLAIMERS}</label><div id="tour_target_registration_2_policies"></div>
+		<div class="col-md-10">
+			{PROPERTY_POLICIES_DISCLAIMERS}
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-md-2 control-label" for="metatitle">{_JOMRES_METATITLE}</label>
+		<div class="col-md-10">
+			<input type="text" size="70" name="metatitle" value="{METATITLE}" class="form-control" placeholder="{_JOMRES_METATITLE}"/>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-md-2 control-label" for="metadescription">{_JOMRES_METADESCRIPTION}</label>
+		<div class="col-md-10">
+			<input type="text" size="70" name="metadescription" value="{METADESCRIPTION}" class="form-control" placeholder="{_JOMRES_METADESCRIPTION}"/>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-md-2 control-label" for="metakeywords">{_JOMRES_METAKEYWORDS}</label>
+		<div class="col-md-10">
+			<input type="text" size="70" name="metakeywords" value="{METAKEYWORDS}" class="form-control" placeholder="{_JOMRES_METAKEYWORDS}"/>
+		</div>
+	</div>
+	<div class="form-actions">
+		<div class="col-md-10 col-md-offset-2">
+			{JOMRESTOOLBAR}
+		</div>
+	</div>
+	<input type="hidden" name="property_uid" value="{PROPERTYUID}" />
+	<input type="hidden" name="task" value="save_property" />
+</form>
+<script type="text/javaScript">
+function myFunction(row_id){
+var row = "row_"+row_id;
+
+var htm = "";
+
+
+  document.getElementById(row).innerHTML = htm ;
+    removeMarkers(map,row_id);
+  
+}
+
+function remove(e){
+
+//console.log( e.parentNode.parentNode.parentNode);
+ e.parentNode.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode.parentNode)
+//var row = "draggable_"+row_id;
+
+//var htm = "";
+
+
+//  document.getElementById(row).innerHTML = htm ;
+  
+  
+}
+jomresJquery(document).ready(function () {
+	
+
+jomresJquery( "#button_add" ).click(function() {
+
+var row_id = jomresJquery(this).attr('data-row');
+
+var row = "#row_"+row_id;
+var row_idi = parseInt(row_id)+1;
+addMarker(map,row_idi);
+jomresJquery(this).attr('data-row',row_idi);
+var htm = "<div class='clear' ></div><div style='clear:both;' />	<div class='row_1' id='row_"+row_idi+"'><div class='col-md-2 table_row_1 first_row'>";
+ htm += " <span onclick='myFunction(\""+row_idi+"\")' class='minus_img col-md-1' id='button_remove' data-row='"+row_idi+"'></span></div>";	
+  htm += "<div class='col-md-2 table_row_1'><select id='country_"+row_idi+"' name='country_"+row_idi+"' class='form-control'>{COUNTRIESDROPDOWNAJAX}	</select>	</div>	<div class='col-md-2 table_row_1' id='property_region_"+row_idi+"'><select id='region_"+row_idi+"' name='region_"+row_idi+"' class='form-control'>	{REGIONDROPDOWNAJAX} </select>	</div>		";
+htm += "<div class='col-md-2 table_row_1'>	<input id='lat_"+row_idi+"' name='lat_"+row_idi+"' type='text' size='20' value='{LAT}' class='form-control' placeholder='00.0000'/> 	</div>";
+	htm += "<div class='col-md-2 table_row_1'><input id='lng_"+row_idi+"' name='long_"+row_idi+"' type='text' size='20' value='{LONG}' class='form-control' placeholder='{00.0000}'/>		</div>			</div>	";
+ 
+ jomresJquery( row ).after( htm );
+ 
+});
+
+});
+	
+jomresJquery( "#button_remove_1" ).click(function() {
+var row_id = jomresJquery(this).attr('data-row');
+
+var row = "#row_"+row_id;
+
+var htm = "";
+
+  jomresJquery( row ).text( htm );
+
+});
+// start add days javascript code pop up dialog and draggable element
+   function addsave(dialog) {
+   
+  
+    }
+
+
+  jomresJquery( function() {
+  
+    var dialog, form,
+  
+    dialog = jomresJquery( "#dialog-form" ).dialog({
+      autoOpen: false,
+      height: 900,
+      width: 1000,
+      modal: true,
+      buttons: {
+        "Save": addsave_1,
+        Cancel: function() {
+          dialog.dialog( "close" );
+        }
+      },
+      close: function() {
+       
+      //  allFields.removeClass( "ui-state-error" );
+      }
+    });
+ 
+   
+ 
+    jomresJquery( "#button_add_days" ).button().on( "click", function() {
+      dialog.dialog( "open" );
+	  var row_id = jomresJquery(this).attr('data-row');
+var row = "#row_day_"+row_id;
+var row_idi = parseInt(row_id)+1;
+jomresJquery(this).attr('data-row',row_idi);
+var htm = "<div style='clear:both;' />	<div class='row_1' id='row_day_"+row_idi+"'>"+row_idi+"</div>	";
+  jomresJquery( row ).after( htm );
+  
+    });
+	
+	
+    jomresJquery( "#add_s" ).button().on( "click", function() {
+	var row_id = jomresJquery(this).attr('data-row');
+    var row = "#section_"+row_id;
+		var row_idi = parseInt(row_id)+1;
+		jomresJquery(this).attr('data-row',row_idi);
+		var htm = "<div style='clear:both;' />";
+		htm += "<div id='section_"+row_idi+"' class='section' ><div class='drag' ><div id='draggable' class='ui-widget-content draggable'>";
+		htm += "<div id='dr_ch'>";
+		htm += "<div class='inp_1'><input name='activity[]' value='' type='text' placeholder='Activity'/></div>";
+		htm += "<div class='inp_2'><input type='text'  class='input_1' name='activity_act_description[]' value='' placeholder='Activity description'/></div><div class='inp_move'><div class='move_par'><span class='move_img'>move</span></div></div>";
+		htm += "<div class='inp_move'><div class='move_del'><span class='minus_img' onclick='remove(this)'>remove</span></div></div></div>";
+		htm += "</div>";
+		htm += "<div class='clear_me' ></div>";
+		htm += "<div id='draggable_2' class='ui-widget-content draggable'>";
+		htm += "<div id='dr_ch'>";
+		htm += "<div class='inp_1'><input name='activity_res[]' value='' type='text' placeholder='Restaurant'/></div>";
+		htm += "<div class='inp_2'><input type='text'  class='input_1' name='activity_act_res_desc[]' value='' placeholder='Restaurant description'/></div>";
+
+		htm += "<div class='inp_move'><div class='move_par'><span class='move_img'>move</span></div></div>";
+		htm += "<div class='inp_move'><div class='move_del'><span class='minus_img' onclick='remove(this)'></span></div></div> </div>";
+			htm += "</div>";
+		htm += "<div class='clear_me' ></div> </div> <div class='clear_me' ></div>";
+		htm += "<div class='drop'>   <div id='droppable' class='ui-widget-header droppable'> <div></div> </div>";
+		htm += "<div class='clear_me' ></div> <div id='droppable_1' class='ui-widget-header droppable'>  <div></div> </div>";
+		htm += "<div class='clear_me' ></div><div id='droppable_2' class='ui-widget-header droppable'>   <div></div> </div>";
+		htm += "<div class='clear_me' ></div> 	</div>  </div>";
+		
+		jomresJquery( row ).after( htm );
+		
+	 drag_drop();
+  
+  
+    });
+	
+  } );
+  function drag_drop(){
+    /*
+var dr_row = 20;
+//console.log('dr_row', dr_row);
+for (var i = 1; i <= dr_row; i++) {
+console.log('i', i);
+     jomresJquery( "#draggable_"+i ).draggable({
+     helper:"clone",
+       handle: "div.move_par",
+       cursor: "crosshair",
+        start: function( event, ui ) {
+                   // console.log(ui.helper.context)
+                  //  console.log('cl',ui.helper.clone().context.innerHTML);
+                }
+    });
+	 
+	
+	}
+	
+	var drop_row = 30;
+for (var i = 1; i <= drop_row; i++) {
+console.log('i_drop', i);
+      jomresJquery( "#droppable_"+i ).droppable({
+
+       hoverClass: "ui-state-over",
+      drop: function( event, ui ) {
+        jomresJquery( this )
+          .addClass( "ui-state-highlight" )
+          .find( "div" )
+            .html( ui.helper.clone().context.innerHTML );
+            jomresJquery( "#droppable_"+i ).droppable("option", "disabled", true); 
+            
+      }
+    });
+	
+	}
+	
+	*/
+
+	  jomresJquery( ".droppable" ).draggable({
+     helper:"clone",
+       handle: "div.move_par",
+       cursor: "crosshair",
+        start: function( event, ui ) {
+                   // console.log(ui.helper.context)
+                  //  console.log('cl',ui.helper.clone().context.innerHTML);
+                }
+    });
+	
+	jomresJquery( ".draggable" ).droppable(
+	
+	{
+       hoverClass: "ui-state-over",
+	   
+      drop: function( event, ui ) {
+        jomresJquery( this )
+          .addClass( "ui-state-highlight" )
+          .find( "div" )
+            .html( ui.helper.clone().context.innerHTML );
+             
+            
+      }
+    });
+	
+		jomresJquery( ".droppable" ).droppable(
+	
+	{
+       hoverClass: "ui-state-over",
+	   
+      drop: function( event, ui ) {
+        jomresJquery( this )
+          .addClass( "ui-state-highlight" )
+          .find( "div" )
+            .html( ui.helper.clone().context.innerHTML );
+             
+            
+      }
+    });
+	
+	  jomresJquery( ".draggable" ).draggable({
+     helper:"clone",
+       handle: "div.move_par",
+       cursor: "crosshair",
+        start: function( event, ui ) {
+                   // console.log(ui.helper.context)
+                  //  console.log('cl',ui.helper.clone().context.innerHTML);
+                }
+    });
+  
+  
+  }
+
+  jomresJquery( function() {
+  
+ drag_drop();
+	    
+  } );
+  </script>
+</patTemplate:tmpl>

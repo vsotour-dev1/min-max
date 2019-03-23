@@ -1,0 +1,214 @@
+<patTemplate:tmpl name="pageoutput" unusedvars="strip">
+<script language="javascript" type="text/javascript">
+	<!--
+	jomresJquery(document).ready(function () {
+		make_datatable_new('jintours_managartour_list', 'Tours List', '{LIVESITE}');
+		
+		
+		// rusty code
+		function make_datatable_new(table_id, pagetitle, livesite, ajaxurl, showTools) {
+	bProcessing = false;
+	bServerSide = false;
+	dt_ajax_options = false;
+	if (typeof ajaxurl !== 'undefined' && ajaxurl != '') {
+		bProcessing = true;
+		bServerSide = true;
+		dt_ajax_options = {
+			"url": ajaxurl,
+			"data": function (d) {
+				d.jr_search = d.search;
+				d.jr_order = d.order;
+				delete d.search;
+				delete d.order;
+				}
+			}
+		}
+	if (typeof showTools === 'undefined')
+		{
+		showTableTools = true;
+		}
+	else
+		{
+		showTableTools = showTools;
+		}
+		
+	if (showTableTools)
+		{
+		if (jomres_template_version == "bootstrap3"){
+			sDomm = "<'row'<'col-xs-4'lr><'col-xs-4'B><'col-xs-4'f>>t<'row'<'col-xs-4'i><'col-xs-8'p>>";
+			}
+		else {
+			sDomm = "<'row-fluid'<'span4'lr><'span4'B><'span4'f>>t<'row-fluid'<'span4'i><'span8'p>>";
+			}
+		}
+	else
+		{
+		if (jomres_template_version == "bootstrap3"){
+			sDomm = "<'row'<'col-xs-4'l><'col-xs-2'r><'col-xs-6'f>>t<'row'<'col-xs-4'i><'col-xs-8'p>>";
+			}
+		else {
+			sDomm = "<'row-fluid'<'span4'r><'span2'r><'span6'f>>t<'row-fluid'<'span4'i><'span8'p>>";
+			}
+		
+		}
+	var oTable = jomresJquery('#' + table_id).dataTable({
+		"processing": bProcessing,
+		"serverSide": bServerSide,
+		"ajax": dt_ajax_options,
+		"jQueryUI": false,
+		"stateSave": true,
+		"autoWidth": false,
+		"dom": sDomm,
+		"lengthMenu": [[10, 25, 50, 100, 500,1000,5000], [10, 25, 50, 100, 500,1000,5000]],
+		"order": [[ 0, "desc" ]],
+		"searchDelay": 2000,
+		"deferRender": true,
+		"language": {
+			"decimal":			'',
+			"emptyTable":		dataTables_sEmptyTable,
+			"info":				dataTables_sInfo,
+			"infoEmpty":		dataTables_sInfoEmpty,
+			"infoFiltered":		dataTables_sInfoFiltered,
+			"infoPostFix":		dataTables_sInfoPostFix,
+			"thousands": 		dataTables_sInfoThousands,
+			"lengthMenu":		dataTables_sLengthMenu,
+			"loadingRecords":	dataTables_sLoadingRecords,
+			"processing":		dataTables_sProcessing,
+			"search":			dataTables_sSearch,
+			"zeroRecords":		dataTables_sZeroRecords,
+			"paginate": {
+				"first":	dataTables_sFirst,
+				"last":		dataTables_sLast,
+				"next":     dataTables_sNext,
+				"previous": dataTables_sPrevious
+			},
+			"aria": {
+				"sortAscending":  dataTables_sSortAscending,
+				"sortDescending": dataTables_sSortDescending
+			}
+		},
+		"responsive": {
+			"details": {
+				"type": "inline"
+			}
+		},
+		"buttons": [
+			{
+				"extend": "copy",
+				"exportOptions": {
+					"columns": ':visible'
+				}
+			},
+			{
+				"extend": "csv",
+				"charset": "utf8",
+				"exportOptions": {
+					"columns": ':visible'
+				}
+			},
+			{
+				"extend": "excel",
+				"title": pagetitle,
+				"charset": "utf16le",
+				"exportOptions": {
+					"columns": ':visible'
+				}
+			},
+			{
+				"extend": "pdf",
+				"charset": "utf8",
+				"orientation": "landscape",
+				"title": pagetitle,
+				"exportOptions": {
+					"columns": ':visible'
+				}
+			},
+			{
+				"extend": "print",
+				"title": pagetitle,
+				"autoPrint": false,
+				"exportOptions": {
+					"columns": ':visible'
+				}
+			},
+			{
+				"extend": "colvis",
+				//"columns": ":gt(0)"
+			}
+		]
+	});
+}
+
+	});
+	//-->
+</script>
+<h2 class="page-header">Tours List</h2>
+<form action="{JOMRES_SITEPAGE_URL_NOSEF}" method="post" name="adminForm"> 
+<div class="well">
+	{JOMRESTOOLBAR}
+</div>
+<table id="jintours_managartour_list" class="table table-striped" width="100%">
+	<thead>
+        <tr>
+            <th><input type="checkbox" name="toggle" value="" onclick="jomres_checkAll({TOTALINLISTPLUSONE});" /></th>
+            <th></th>
+            <th>{HPROFILE_TITLE}</th>
+
+            {SPACES_LABEL}
+            <th>{HDATE}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <patTemplate:tmpl name="rows"  type="simpleCondition" requiredVars="title" unusedvars="nbsp">
+        <tr >
+            <td >{CHECKBOX}</td>
+            <td >{EDITLINK}</td>
+            <td id="{ID}" class="jintour_third_party_extra_div tdshow tooltip_1 tooltipstered" data-tooltip-content="#{ID}_table">{TITLE}</td>
+
+           {SPACES}
+            <td>{TOURDATE}</td>
+        </tr>
+
+        </patTemplate:tmpl>
+    </tbody>
+</table>
+
+
+<input type="hidden" name="boxchecked" value="0" />
+<input type="hidden" name="task" value="jintour_batch_delete_tours" />
+</form>
+
+
+
+    <patTemplate:tmpl name="table_price"  type="simpleCondition" requiredVars="title" unusedvars="nbsp">
+
+        {PRICE_TABLE}
+
+
+    </patTemplate:tmpl>
+
+    <link href='{LIVE_SITE}/{JOMRES_ROOT_DIRECTORY}/remote_plugins/min_max_profiles/templates/bootstrap3/dist/css/tooltipster.bundle.min.css' rel='stylesheet' type='text/css'>
+
+    <script src='{LIVE_SITE}/{JOMRES_ROOT_DIRECTORY}/remote_plugins/min_max_profiles/templates/bootstrap3/dist/js/tooltipster.bundle.min.js' type='text/javascript'></script>
+
+    <script>
+        jomresJquery(document).ready(function() {
+            jomresJquery('.tooltip_1').tooltipster({
+                theme: 'tooltipster-shadow'
+            });
+
+
+
+            jomresJquery('select').change(function () {
+
+                setTimeout(function(){
+                    jomresJquery('.tooltip_1').tooltipster({
+                        theme: 'tooltipster-shadow'
+                    });
+                }, 7000);
+
+            });
+        });
+    </script>
+
+</patTemplate:tmpl>

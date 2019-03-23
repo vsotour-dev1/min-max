@@ -1,0 +1,324 @@
+.container{
+    margin: 0 auto;
+  /*  width: 30%; */
+}
+
+.content{
+    border: 1px solid black;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+.content span{
+    width: 250px;
+}
+
+.content span:hover{
+    cursor: pointer;
+}
+
+
+#wrapper {
+	  text-align: left;
+	  width: 720px;
+	  margin-left: auto;
+	  margin-right: auto;
+}
+
+.act_left, .act_right{
+	float:left;
+	margin-left:15px;
+	
+}
+
+.add_days{
+float:left;	
+}
+
+#options{
+	width: 200px;
+	height:550px;
+	border:1px solid black;
+	float:left;
+}
+
+#frame{
+	width:513px;
+	height:550px;
+	//background-image: url("../images/UK-Map.gif");
+	background-repeat: repeat-y;
+    	background-position: 0 0;
+    	border:1px solid black;
+    	float:right;
+}
+
+#tbldevs{
+	border:1px solid black;
+	width:80%;
+	margin-left:50px;
+	margin-top:10px;
+}
+
+#tbldevs th{
+	text-align:center;
+	height:50px;
+	width:50px;
+}
+
+#tbldevs td{
+	height:50px;
+}
+
+
+#drag1 {
+	margin-left:15px;
+	margin-top:15px;
+	background-image: url("../images/cf_32x32.png");
+	width:32px;
+	height:32px;
+}
+
+#drag2 {
+	margin-left:15px;
+	margin-top:15px;
+	background-image: url("../images/dw_32x32.png");
+	width:32px;
+	height:32px;
+}
+
+#drag3 {
+	margin-left:15px;
+	margin-top:15px;
+	background-image: url("../images/fla_32x32.png");
+	width:32px;
+	height:32px;
+}
+
+#drag4 {
+	margin-left:15px;
+	margin-top:15px;
+	background-image: url("../images/flex_32x32.png");
+	width:32px;
+	height:32px;
+}
+
+#drag5 {
+	margin-left:15px;
+	margin-top:15px;
+	background-image: url("../images/pdf_32x32.png");
+	width:32px;
+	height:32px;
+}
+
+#drag6 {
+	margin-left:15px;
+	margin-top:15px;
+	background-image: url("../images/ps_32x32.png");
+	width:32px;
+	height:32px;
+}
+
+.ui-draggable-helperMoving {
+	border: 1px dotted #000;
+	padding: 6px;
+	background: #fff;
+	font-size: 1.2em;
+	width:100px;
+	height:100px;
+}
+
+.ui-draggable-helperStoped {
+	border: 1px solid #000;
+	width:5px;
+	height:5px;
+}
+
+
+
+/* classes for dragged stuff */
+.dragged1 {
+	position:absolute; 
+	background-image: url("../images/cf_32x32.png");
+	width:32px;
+	height:32px;
+}
+
+.dragged2 {
+	position:absolute; 
+	background-image: url("../images/dw_32x32.png");
+	width:32px;
+	height:32px;
+}
+
+.dragged3 {
+	position:absolute; 
+	background-image: url("../images/fla_32x32.png");
+	width:32px;
+	height:32px;
+}
+
+.dragged4 {
+	position:absolute; 
+	background-image: url("../images/flex_32x32.png");
+	width:32px;
+	height:32px;
+}
+
+.dragged5 {
+	position:absolute; 
+	background-image: url("../images/pdf_32x32.png");
+	width:32px;
+	height:32px;
+}
+
+.dragged6 {
+	position:absolute; 
+	background-image: url("../images/ps_32x32.png");
+	width:32px;
+	height:32px;
+}
+
+
+#element{
+	border:1px solid red
+}
+
+.inp_1, .inp_2, .inp_move {
+  
+  float:left;
+
+}
+
+.inp_1{
+  width:30%;
+  
+}
+.move_del{
+  
+  float:left;
+  margin-left:10px;
+}
+.section .ui-widget-header{
+	
+border: 2px dotted #ccc;	
+background: none;
+	
+}	
+
+.section{
+margin-top:50px;	
+    border: 1px solid #a6c9e2;
+	
+}
+.draggable{
+    min-height: 100px;
+    padding-top: 20px;
+    padding-left: 10px;
+	width:95%;
+	margin-top:10px;
+	margin-bottom:10px;
+	background: none !important;
+}
+#dialog-form .input_title {
+    width: 50%;
+}
+.ui-draggable-dragging {
+	width: 95%;
+}
+#button_edit_days {
+display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 15px;
+    line-height: 1.42857143;
+    border-radius: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+	
+}
+
+.row_1{
+	margin-bottom: 10px;
+	}
+	
+.inp_2 {
+    width: 50%;
+ margin-left: 10px; 
+    float: left;
+}
+input.input_1 {
+    width: 80%;
+}
+ 
+.input_1{
+  width: 80%;
+}
+.clear_me{
+  
+  clear:both;
+}
+.droppable{
+  min-height: 50px; 
+  width:95%;
+  background:none !important;
+  margin-top:10px;
+  margin-bottom:10px;
+  
+}
+
+ .ui-state-over{
+    background: yellow;
+	
+	width: 100%;
+	
+    
+    }
+
+.add_sec{
+text_align:center;
+
+}
+	.move_img {
+    width: 25px;
+    height: 25px;
+    background: url(https://dev3.vsporty.com/jomres/remote_plugins/min_max_profiles/css/move.jpg) center center no-repeat;
+    display: block;
+    text-indent: -9999px;
+    background-size: 25px;
+}
+
+.minus_img {
+		width: 25px;
+    height: 25px;
+    background: url(https://dev3.vsporty.com/jomres/remote_plugins/min_max_profiles/css/minus.jpg) center center no-repeat;
+    display: block;
+    text-indent: -9999px;
+    background-size: 25px;
+	}
+	.but {
+    display: block;
+    background: #ccc;
+    width: 150px;
+    text-align: center;
+    padding: 7px;
+    font-weight: bold;
+	    cursor: pointer;
+}
+  
+ .add_b_s {
+    text-align: center;
+    margin-bottom: 10px;
+}
+.mce-menubar {
+    
+    display: none !important;
+}

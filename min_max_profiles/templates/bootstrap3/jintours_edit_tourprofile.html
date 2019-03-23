@@ -1,0 +1,346 @@
+<patTemplate:tmpl name="pageoutput" unusedvars="strip">
+
+<style type="text/css">
+	.minus_img {
+		width: 25px;
+    height: 25px;
+    background: url({LIVE_SITE}/{JOMRES_ROOT_DIRECTORY}/remote_plugins/min_max_profiles/css/minus.jpg) center center no-repeat;
+    display: block;
+    text-indent: -9999px;
+    background-size: 25px;
+	}
+
+
+
+.first_row {
+    border: none;
+    background: white;
+	cursor: pointer;
+}
+
+.reset_b{
+    color: white;
+    font-weight: bold;
+    display: block;
+    background: #5c9ccc;
+    text-align: center;
+    margin-top: 10px;
+    width: 70%;
+    margin-left: 170px;
+    height: 20px;
+    cursor: pointer;
+	
+
+}
+</style>
+
+
+<h2 class="page-header">{PAGETITLE}</h2>
+<form action="{JOMRES_SITEPAGE_URL_NOSEF}" method="post" name="adminForm" class="form-horizontal" role="form">
+
+<div class="form-group">
+	<label class="col-md-2 control-label" for="title">{_CLONE_TARIFFS_SOURCE}</label>
+	<div class="col-md-10">
+		<input type="text" class="form-control" name="title" value="{TITLE}" />
+	</div>
+</div>
+<div class="form-group">
+	<label class="col-md-2 control-label" for="description">{HDESCRIPTION}</label>
+	<div class="col-md-10">
+		<textarea rows="5" name="description" class="form-control">{DESCRIPTION}</textarea>
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-md-2 control-label" for="taxrate">{HTAXCODE}</label>
+	<div class="col-md-10">
+		{TAXRATEDROPDOWN}
+	</div>
+</div>
+<div class="form-group">
+	<label class="col-md-2 control-label" for="validfrom">{HSTART_DATE}</label>
+	<div class="col-md-10">
+		{VALIDFROM}
+	</div>
+</div>
+<div class="form-group">
+	<label class="col-md-2 control-label" for="validto">{HEND_DATE}</label>
+	<div class="col-md-10">
+		{VALIDTO}
+	</div>
+</div>
+<div class="form-group">
+		<label class="col-md-2 control-label">{SELECTED_DATE}</label>
+	<div class="col-md-10">
+	
+	<div class="col-md-2">
+	<label class="checkbox inline"><input style="margin-left:-20px;" type="radio" name="specific_date" value="0" {HD}> {HDAYS_OF_WEEK}</label>
+		<label class="checkbox inline">
+			<input type="checkbox" name="monday" value="1" {MONDAY_CHECKED} > {MONDAY}
+		</label>
+		<label class="checkbox inline">
+			<input type="checkbox" name="tuesday" value="1" {TUESDAY_CHECKED} > {TUESDAY}
+		</label>
+		<label class="checkbox inline">
+			<input type="checkbox" name="wednesday" value="1" {WEDNESDAY_CHECKED} > {WEDNESDAY}
+		</label>
+		<label class="checkbox inline">
+			<input type="checkbox" name="thursday" value="1" {THURSDAY_CHECKED} > {THURSDAY}
+		</label>
+		<label class="checkbox inline">
+			<input type="checkbox" name="friday" value="1" {FRIDAY_CHECKED} > {FRIDAY}
+		</label>
+		<label class="checkbox inline">
+			<input type="checkbox" name="saturday" value="1" {SATURDAY_CHECKED} > {SATURDAY}
+		</label>
+		<label class="checkbox inline">
+			<input type="checkbox" name="sunday" value="1" {SUNDAY_CHECKED} > {SUNDAY}
+		</label>
+		
+		</div>
+		<div class="col-md-2">
+		<label class="checkbox inline"><input style="margin-left:-20px;" type="radio" name="specific_date" value="1" {SD}> {SPECIFICDATE}</label>
+	
+		<div id="mdp-demo"> </div>
+		<div id="reset_b" class="reset_b">Reset</div>
+		<input type="hidden" id="calendar_dates" name="calendar_dates" class="calendar_dates"  value=""/>
+		</div>
+		
+		
+	</div>
+
+</div>
+
+
+	{OUTPUT_SPACES}
+	
+	<div class="form-group">
+	<label class="col-md-2 control-label" for="title">{_MAIN_PRICE}</label>
+	<div class="col-md-2">
+		<input type="text" class="form-control" name="mainprice" value="{MAINPRICE}" />
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-md-2 control-label" for="price_class">{PRICECLASS}</label>
+	<div class="col-md-1" style="text-align: center;
+    padding-left;
+    width: 50px;">
+		<div style="padding: 5px;font-weight: bold;"></div>
+	</div>
+	<div class="table_1 col-md-10">
+	<div class="head">
+	<div class="col-md-1 table_row  first_row">
+		
+	</div>
+	<div class="col-md-1 table_row">
+		{MIN}
+	</div>
+	<div class="col-md-1 table_row">
+		{MAX}
+	</div>
+	{PRICE_SPACES}
+	</div>
+	<div class="clear" style="clear:both;"></div>
+	{PRICE_INPUT_SPACES}
+		
+
+
+	</div>
+	
+	
+</div>
+
+
+<div class="form-actions">
+	<div class="col-md-10 col-md-offset-2">
+		{JOMRESTOOLBAR}
+	</div>
+</div>
+<input type="hidden" name="id" value="{ID}" />
+<input type="hidden" name="no_html" value="1" />
+<input type="hidden" name="task" value="jintour_save_profile" />
+</form>
+
+<script type="text/javaScript">
+	function myFunction(row_id){
+var row = "row_"+row_id;
+
+var htm = "";
+
+
+  document.getElementById(row).innerHTML = htm ;
+  
+}
+jomresJquery(document).ready(function () {
+
+jomresJquery( "#button_add" ).click(function() {
+var row_id = jomresJquery(this).attr('data-row');
+
+var row = "#row_"+row_id;
+var row_idi = parseInt(row_id)+1;
+jomresJquery(this).attr('data-row',row_idi);
+var htm = "<div class='clear' ></div>	<div class='row_1' id='row_"+row_idi+"'><div class='col-md-1 table_row_1 first_row'> <span onclick='myFunction(\""+row_idi+"\")' class='minus_img' id='button_remove' data-row='"+row_idi+"'></span></div>	<div class='col-md-1 table_row_1'>		<input name='spaces_table["+row_idi+"][min]' id='min_"+row_idi+"' class='space_row' />	</div>	<div class='col-md-1 table_row_1'>		<input name='spaces_table["+row_idi+"][max]' id='max_"+row_idi+"' class='space_row' />	</div>	{PRICE_INPUT_SPACES_JAVASCRIPT}		</div>	";
+
+
+  jomresJquery( row ).after( htm );
+});
+
+
+	
+jomresJquery( "#button_remove_1" ).click(function() {
+var row_id = jomresJquery(this).attr('data-row');
+
+var row = "#row_"+row_id;
+
+var htm = "";
+
+  jomresJquery( row ).text( htm );
+});
+jomresJquery("#reset_b").click(function() {
+
+
+jomresJquery('#mdp-demo').multiDatesPicker('resetDates','picked');
+});
+var today = new Date();
+var y = today.getFullYear();
+
+
+jomresJquery('#mdp-demo').multiDatesPicker({
+{ADDDATE}
+numberOfMonths: [1,2],
+defaultDate: '{TD}'+y,
+altField: '#calendar_dates'
+});
+
+
+
+//shift click dates select rsuty work
+
+var input = jomresJquery('input.date');
+var dates;
+var ShiftHeld = false;
+var DateFrom;
+var DateTo;
+
+
+jomresJquery(document).bind('keyup keydown', function (e) {
+    ShiftHeld = e.shiftKey
+}).bind('keyup', function (e) {
+    var code = (e.keyCode ? e.keyCode : e.which);
+    if (code === 16 && DateFrom && DateTo) {
+        addMultipleDates(DateFrom, DateTo);
+    }
+    if (code === 16) {
+        DateFrom = false;
+        DateTo = false;
+    }
+	
+	
+});
+
+
+
+
+
+function add_date(date) {
+    if (jomresJquery.inArray(date, dates) < 0) {
+        dates.push(date);
+    }
+}
+
+function remove_date(i) {
+    dates.splice(i, 1);
+}
+
+function check_date(date) {
+
+
+    var date = date.split("/");
+    var date = date[1] + "/" + date[0] + "/" + date[2];
+    var i = jomresJquery.inArray(date, dates);
+    if (i >= 0) remove_date(i);
+    else add_date(date);
+}
+
+
+
+function datepicker() {
+    var dates_value = input.val();
+
+	
+    dates = dates_value ? dates_value.split(',') : [];
+    jomresJquery("#datepicker").datepicker({
+        onSelect: function (date) {
+            if(ShiftHeld) {
+                if (!DateFrom) {
+                    DateFrom = date;
+                } else {
+                    DateTo = date;
+                }
+                return false;
+
+            }
+            check_date(date);
+        },
+        beforeShowDay: function (date) {
+            for (i = 0; i < dates.length; i++) {
+                var post_date = dates[i].split("/");
+                if (date.getDate() == post_date[0] && date.getMonth() == post_date[1] - 1 && date.getFullYear() == post_date[2]) {
+                    return [true, "ui-state-active"];
+                }
+            }
+            input.val(dates + "");
+            return [true, ''];
+        }
+    });
+}
+
+
+function addMultipleDates(a, b) {
+    var multi_dates = list_dates(a, b);
+    jomresJquery.each(multi_dates, function (i, date) {
+
+        if (jomresJquery.inArray(date, dates) < 0) {
+            var old_dates = input.val();
+            if (old_dates.length) {
+                input.val(old_dates + ',' + date);
+            } else {
+                input.val(date);
+            }
+        };
+    });
+    jomresJquery("#datepicker").datepicker("destroy");
+    datepicker();
+
+}
+
+
+function list_dates(a, b) {
+
+
+    var list = [];
+    var a_date = new Date(a);
+    var b_date = new Date(b);
+
+    if (a_date > b_date) {
+        while (a_date >= b_date) {
+            var date_format = ('0' + b_date.getDate()).slice(-2) + '/' + ('0' + (b_date.getMonth() + 1)).slice(-2) + '/' + b_date.getFullYear();
+            list.push(date_format);
+            b_date = new Date(b_date.setDate(b_date.getDate() + 1));
+        }
+    } else if (a_date < b_date) {
+        while (b_date >= a_date) {
+            var date_format = ('0' + a_date.getDate()).slice(-2) + '/' + ('0' + (a_date.getMonth() + 1)).slice(-2) + '/' + a_date.getFullYear();
+            list.push(date_format);
+            a_date = new Date(a_date.setDate(a_date.getDate() + 1));
+        }
+    } else {
+        list.push(a);
+    }
+
+    return list;
+}
+});
+</script>
+</patTemplate:tmpl>
